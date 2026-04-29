@@ -1,0 +1,226 @@
+.apply {
+  padding: 100px 80px;
+  background: var(--bg2);
+  position: relative;
+}
+
+.apply__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.apply__tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--orange);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.apply__title {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 4vw, 52px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--white);
+  margin-bottom: 20px;
+}
+
+.apply__title span {
+  color: var(--orange);
+}
+
+.apply__desc {
+  font-size: 14px;
+  color: var(--grey);
+  line-height: 1.7;
+}
+
+/* ── Form ─────────────────────────────── */
+.apply__form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.apply__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.apply__field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.apply__label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--grey);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.apply__input,
+.apply__textarea {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 14px 16px;
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+  resize: none;
+}
+
+.apply__input::placeholder,
+.apply__textarea::placeholder {
+  color: #444;
+}
+
+.apply__input:focus,
+.apply__textarea:focus {
+  border-color: var(--orange);
+}
+
+/* ── Role pills ───────────────────────── */
+.apply__roles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.apply__role-btn {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  color: var(--grey);
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.apply__role-btn:hover {
+  border-color: var(--orange);
+  color: var(--orange);
+}
+
+.apply__role-btn.active {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: #000;
+}
+
+/* ── Submit ───────────────────────────── */
+.apply__submit {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 18px 32px;
+  background: var(--orange);
+  color: #000;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+  align-self: flex-start;
+}
+
+.apply__submit:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px var(--orange-glow);
+}
+
+.apply__submit:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* ── Success state ────────────────────── */
+.apply__success {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 48px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--orange);
+  border-radius: 2px;
+  animation: success-in 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+
+@keyframes success-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.apply__success-icon {
+  font-size: 32px;
+  color: var(--orange);
+}
+
+.apply__success h3 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -0.02em;
+}
+
+.apply__success p {
+  font-size: 14px;
+  color: var(--grey);
+}
+
+.apply__reset {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--grey);
+  padding: 10px 20px;
+  border-radius: 2px;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.apply__reset:hover {
+  border-color: var(--orange);
+  color: var(--orange);
+}
+
+@media (max-width: 900px) {
+  .apply {
+    padding: 60px 24px;
+  }
+  .apply__inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .apply__row {
+    grid-template-columns: 1fr;
+  }
+}
