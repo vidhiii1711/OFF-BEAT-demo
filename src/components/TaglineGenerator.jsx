@@ -18,9 +18,11 @@ async function fetchGemini(prompt) {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
+      'HTTP-Referer': 'https://offbeat-landing.vercel.app',
+      'X-Title': 'OFF/BEAT Tagline Generator',
     },
     body: JSON.stringify({
-      model: 'meta-llama/llama-3.1-8b-instruct:free',
+      model: 'meta-llama/llama-3.3-70b-instruct:free',
       messages: [{ role: 'user', content: prompt }],
       max_tokens: 200,
     }),
@@ -38,11 +40,6 @@ async function generateTaglines(idea, onRetrying) {
   if (res.status === 429) throw new Error('RATE_LIMIT')
   if (res.status === 400) throw new Error('BAD_KEY')
   if (!res.ok) throw new Error(`API_${res.status}`)
-  // const data = await res.json()
-  // const raw = data.candidates?.[0]?.content?.parts?.[0]?.text || '[]'
-  // const clean = raw.replace(/```json|```/g, '').trim()
-  // const parsed = JSON.parse(clean)
-  // return Array.isArray(parsed) ? parsed : Object.values(parsed)
   const data = await res.json()
 const raw = data.choices?.[0]?.message?.content || '[]'
 const clean = raw.replace(/```json|```/g, '').trim()
