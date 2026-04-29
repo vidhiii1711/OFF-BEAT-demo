@@ -12,18 +12,6 @@ Generate exactly 3 short, punchy brand taglines for this startup idea: "${idea}"
 Rules: under 8 words each, bold and aspirational, focused on Indian youth culture.
 Respond ONLY with a JSON array of 3 strings, no markdown.
 Example: ["Tagline one", "Tagline two", "Tagline three"]`
-
-// async function fetchGemini(prompt) {
-//   const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${OPENROUTER_API_KEY}`
-//   return fetch(url, {
-//     method: 'POST',
-//     headers: { 'Content-Type': 'application/json' },
-//     body: JSON.stringify({
-//       contents: [{ parts: [{ text: prompt }] }],
-//       generationConfig: { temperature: 0.9, maxOutputTokens: 200 },
-//     }),
-//   })
-// }
 async function fetchGemini(prompt) {
   return fetch('https://openrouter.ai/api/v1/chat/completions', {
     method: 'POST',
