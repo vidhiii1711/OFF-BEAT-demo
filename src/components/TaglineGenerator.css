@@ -1,0 +1,214 @@
+.tgen {
+  padding: 100px 80px;
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+}
+
+.tgen__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.tgen__tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--orange);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.tgen__title {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 4vw, 56px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--white);
+  margin-bottom: 20px;
+}
+
+.tgen__title span {
+  color: var(--orange);
+}
+
+.tgen__desc {
+  font-size: 14px;
+  color: var(--grey);
+  line-height: 1.7;
+  max-width: 300px;
+}
+
+.tgen__input-wrap {
+  display: flex;
+  gap: 0;
+}
+
+.tgen__input {
+  flex: 1;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-right: none;
+  border-radius: 2px 0 0 2px;
+  padding: 16px 20px;
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.tgen__input::placeholder {
+  color: #555;
+}
+
+.tgen__input:focus {
+  border-color: var(--orange);
+}
+
+.tgen__btn {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  background: var(--orange);
+  color: #000;
+  border: none;
+  padding: 16px 24px;
+  cursor: pointer;
+  border-radius: 0 2px 2px 0;
+  transition: opacity 0.2s, box-shadow 0.2s;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tgen__btn:hover:not(:disabled) {
+  box-shadow: 0 0 24px var(--orange-glow);
+}
+
+.tgen__btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.tgen__spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(0,0,0,0.3);
+  border-top-color: #000;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.tgen__error {
+  font-size: 12px;
+  color: #ff4444;
+  margin-top: 10px;
+  font-family: var(--font-mono);
+  line-height: 1.5;
+}
+
+.tgen__info {
+  font-size: 12px;
+  color: var(--orange);
+  margin-top: 10px;
+  font-family: var(--font-mono);
+  line-height: 1.5;
+  animation: pulse-info 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-info {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+
+.tgen__results {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tgen__result {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--orange);
+  padding: 16px 20px;
+  border-radius: 0 2px 2px 0;
+  animation: result-in 0.4s cubic-bezier(0.16,1,0.3,1) both;
+}
+
+@keyframes result-in {
+  from { opacity: 0; transform: translateX(-16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.tgen__result-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--orange);
+  flex-shrink: 0;
+}
+
+.tgen__result-text {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--white);
+  flex: 1;
+  letter-spacing: -0.01em;
+}
+
+.tgen__copy {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--grey);
+  font-size: 16px;
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+  flex-shrink: 0;
+}
+
+.tgen__copy:hover {
+  color: var(--orange);
+  border-color: var(--orange);
+}
+
+@media (max-width: 900px) {
+  .tgen {
+    padding: 60px 24px;
+  }
+  .tgen__inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .tgen__input-wrap {
+    flex-direction: column;
+  }
+  .tgen__input {
+    border-right: 1px solid var(--border);
+    border-radius: 2px 2px 0 0;
+  }
+  .tgen__btn {
+    border-radius: 0 0 2px 2px;
+    justify-content: center;
+  }
+}
