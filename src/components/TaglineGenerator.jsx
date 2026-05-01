@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react'
 import './TaglineGenerator.css'
-const OPENROUTER_API_KEY = import.meta.env.VITE_OPENROUTER_API_KEY || ''
+const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY || ''
 
 const COOLDOWN_SECONDS = 15
 const RETRY_DELAY_MS = 12000
@@ -13,22 +13,17 @@ Rules: under 8 words each, bold and aspirational, focused on Indian youth cultur
 Respond ONLY with a JSON array of 3 strings, no markdown.
 Example: ["Tagline one", "Tagline two", "Tagline three"]`
 async function fetchGemini(prompt) {
-  return fetch('https://openrouter.ai/api/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
-      'HTTP-Referer': 'https://offbeat-landing.vercel.app',
-      'X-Title': 'OFF/BEAT Tagline Generator',
-    },
-    body: JSON.stringify({
-      model: 'meta-llama/llama-3.3-70b-instruct:free',
-      messages: [{ role: 'user', content: prompt }],
-      max_tokens: 200,
-    }),
-  })
+  return fetch(
+    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`,
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }]
+      }),
+    }
+  )
 }
-
 async function generateTaglines(idea, onRetrying) {
   const prompt = buildPrompt(idea)
   let res = await fetchGemini(prompt)
@@ -41,10 +36,11 @@ async function generateTaglines(idea, onRetrying) {
   if (res.status === 400) throw new Error('BAD_KEY')
   if (!res.ok) throw new Error(`API_${res.status}`)
   const data = await res.json()
-const raw = data.choices?.[0]?.message?.content || '[]'
-const clean = raw.replace(/```json|```/g, '').trim()
-const parsed = JSON.parse(clean)
-return Array.isArray(parsed) ? parsed : Object.values(parsed)
+  // Gemini returns differently from OpenRouter
+  const raw = data.candidates?.[0]?.content?.parts?.[0]?.text || '[]'
+  const clean = raw.replace(/```json|```/g, '').trim()
+  const parsed = JSON.parse(clean)
+  return Array.isArray(parsed) ? parsed : Object.values(parsed)
 }
 
 export default function TaglineGenerator() {
